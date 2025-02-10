@@ -1,9 +1,26 @@
 services:
+  db:
+    image: postgres:16
+    restart: always
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgresdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
   web:
+    container_name: lacrei-saude-api
+    depends_on:
+      - db
     build: .
     ports:
       - "8000:8000"
-    environment:
-      - PYTHONUNBUFFERED=1
     tty: true
     stdin_open: true
+
+volumes:
+  pg-data:
