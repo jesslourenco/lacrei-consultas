@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.request import Request
 from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
 
-from api.services.profissional_de_saude_service import ProfissionalDeSaudeService
-from api.serializers.profissional_de_saude_serializer import ProfissionalDeSaudeSerializer
+from api.services.paciente_service import PacienteService
+from api.serializers.paciente_serializer import PacienteSerializer
 
 @extend_schema_view(
     retrieve=extend_schema(
@@ -13,29 +13,28 @@ from api.serializers.profissional_de_saude_serializer import ProfissionalDeSaude
     ),
     update=extend_schema(
         parameters=[OpenApiParameter(name="id", required=True, type=int, location=OpenApiParameter.PATH)],
-        request=ProfissionalDeSaudeSerializer
+        request=PacienteSerializer
     ),
     destroy=extend_schema(
         parameters=[OpenApiParameter(name="id", required=True, type=int, location=OpenApiParameter.PATH)]
     ),
     create=extend_schema(
-        request=ProfissionalDeSaudeSerializer
-    ),
-
+        request=PacienteSerializer
+    )
 )
 
-class ProfissionalDeSaudeView(ViewSet):
-    serializer_class = ProfissionalDeSaudeSerializer
+class PacienteView(ViewSet):
+    serializer_class = PacienteSerializer
     
     def list(self, request: Request) -> Response:
-        providers = ProfissionalDeSaudeService.list_providers()
-        serializer = self.serializer_class(providers, many=True)
+        pacients = PacienteService.list_pacients()
+        serializer = self.serializer_class(pacients, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request: Request, pk: int = None) -> Response:
         try:
-            provider = ProfissionalDeSaudeService.get_provider(pk)
-            serializer = self.serializer_class(provider)
+            pacient = PacienteService.get_pacient(pk)
+            serializer = self.serializer_class(pacient)
             return Response(serializer.data)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
@@ -43,30 +42,30 @@ class ProfissionalDeSaudeView(ViewSet):
     def create(self, request: Request) -> Response:
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            provider = ProfissionalDeSaudeService.create_provider(serializer.validated_data)
-            return Response(self.serializer_class(provider).data, status=status.HTTP_201_CREATED)
+            pacient = PacienteService.create_pacient(serializer.validated_data)
+            return Response(self.serializer_class(pacient).data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request: Request, pk: int = None) -> Response:
         try:
-            provider = ProfissionalDeSaudeService.get_provider(pk) 
+            pacient = PacienteService.get_pacient(pk) 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = self.serializer_class(instance=provider, data=request.data, partial=True) 
+        serializer = self.serializer_class(instance=pacient, data=request.data, partial=True) 
         if serializer.is_valid():
             try:
-                updated_provider = ProfissionalDeSaudeService.update_provider(pk, serializer.validated_data)
-                return Response(self.serializer_class(updated_provider).data)
+                updated_pacient = PacienteService.update_pacient(pk, serializer.validated_data)
+                return Response(self.serializer_class(updated_pacient).data)
             except Exception as e:
                 return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-        
+
     def destroy(self, request: Request, pk: int = None) -> Response:
         try:
-            ProfissionalDeSaudeService.delete_provider(pk)
+            PacienteService.delete_pacient(pk)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
