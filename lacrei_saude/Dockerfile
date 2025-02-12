@@ -1,43 +1,43 @@
+## Stage 1 ##
 FROM python:3.13-slim AS builder
 
 RUN apt-get update && apt-get install -y \
   curl \
+  gcc \
   libpq-dev \
+  postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
-# Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
-# Add Poetry to PATH
 ENV PATH="/root/.local/bin:$PATH"
 
-# 🚀 Disable virtual environment creation
 RUN poetry config virtualenvs.create false
 
-# Copy dependency files
 COPY pyproject.toml poetry.lock ./
 
-# Install dependencies globally
 RUN poetry install --no-interaction --no-root
 
-##### Stage 2: Runtime #####
+## Stage 2 ##
 FROM python:3.13-slim
 
 WORKDIR /app
 
-# Install runtime dependencies
 RUN apt-get update && apt-get install -y \
+  curl \
+  gcc \
+  libpq-dev \
+  postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
-# Copy installed packages from builder
 COPY --from=builder /usr/local /usr/local
 
-# Copy application source code
 COPY . .
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Expose Django’s default port
 EXPOSE 8000
 
-# 🚀 Start Django app
+ENTRYPOINT ["/entrypoint.sh"] 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
