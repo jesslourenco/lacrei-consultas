@@ -4,10 +4,12 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from api.views.profissional_de_saude_view import ProfissionalDeSaudeView
 from api.views.paciente_view import PacienteView
+from api.views.consulta_view import ConsultaView
 
 router = DefaultRouter()
 router.register(r'profissionais', ProfissionalDeSaudeView, basename="profissional")
 router.register(r'pacientes', PacienteView, basename="paciente")
+router.register(r'consultas', ConsultaView, basename="consulta")
 
 urlpatterns = [
     path("", include(router.urls)),
