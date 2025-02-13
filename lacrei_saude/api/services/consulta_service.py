@@ -21,6 +21,12 @@ class ConsultaService:
     def book_appt(paciente_id: int, profissional_id: int, data_hora) -> Consulta:
         if ConsultaRepo.get_by_provider_and_datetime(profissional_id, data_hora):
             raise ValidationError("Horário já está agendado para este profissional.")
+        
+        if data_hora.hour < 8 or data_hora.hour >= 18:
+            raise ValidationError("Consultas devm ser agendadas entre 08:00 e 18:00.")
+    
+        if data_hora.weekday() in [5, 6]: 
+            raise ValidationError("A consulta não pode ser agendada em finais de semana.")
 
         return ConsultaRepo.create(paciente_id, profissional_id, data_hora)
 

@@ -37,7 +37,7 @@ class ConsultaView(ViewSet):
 
     def retrieve(self, request: Request, pk=None) -> Response:
         try:
-            appt = ConsultaService.get_app(pk)
+            appt = ConsultaService.get_appt(pk)
             serializer = self.serializer_class(appt)
             return Response(serializer.data)
         except ValidationError as e:
