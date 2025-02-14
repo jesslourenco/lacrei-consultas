@@ -8,7 +8,7 @@ API Restful que permite o gerenciamento completo de consultas médicas, profissi
   - [Decisões de Arquitetura e Design de Código](#decisões-de-arquitetura-e-design-de-código)
   - [Considerações](#considerações)
 - [Vamos Começar?](#vamos-começar)
-  - [Pré-requisitos](#pre-requisitos)
+  - [Pré-requisitos](#pré-requisitos)
   - [Como Configurar o Ambiente e Rodar o Projeto](#como-configurar-o-ambiente-e-rodar-o-projeto)
   - [Descrição dos Endpoints](#descrição-dos-endpoints)
   - [Como Interagir com a API](#como-interagir-com-a-api)
@@ -36,6 +36,7 @@ Dependências:
 - `drf-spectacular:` ferramenta para gerar documentação automaticamente no padrão OpenAPI. Usada no projeto para simplificar a manutenção de especificações e facilitar testes manuais.
 - `email-validator:` usado no projeto em conjunto com uma REGEX mais restrita para validar endereços de e-mail, garantindo que os dados inseridos pelos usuários sigam um formato correto e sejam válidos.
 - `psycopg2-binary:` driver usado para conectar o Django ao banco de dados PostgreSQL. A versão "binary" foi escolhida a fim de agilizar a configuração do ambiente no container Docker, pois ela já vem com todas as suas dependências compiladas.
+<br>
 
 ### Decisões de Arquitetura e Design de Código
 #### Arquitetura em Camadas
@@ -44,17 +45,21 @@ O projeto segue uma `arquitetura em camadas`, separando claramente as responsabi
 - `Camada de Serviço (Services):` Contém a lógica de negócios central da aplicação.
 - `Camada de Domínio/Dados (Models):` Define as entidades principais com algumas validações gerais de formato de dados.
 - `Camada de Infraestrutura (Repositories):` Gerencia a persistência dos dados com PostgreSQL.
+<br>
 
 #### Programação Orientada a Objetos (POO)
 A escolha de `Programação Orientada a Objetos (POO)` neste projeto foi feita para garantir um código mais limpo, modular, reutilizável e organizado. Além disso, o paradigma também é utilizado pelo Django e pelo DRF.
+<br><br>
 
 #### Uso de Type Hints
 O projeto faz uso extensivo de `Type Hints` para melhorar a legibilidade, manutenção e confiabilidade do código. O suporte a tipagem estática no Python ajuda a detectar erros mais cedo, melhorar a experiência de desenvolvimento e facilitar a colaboração em equipe em projetos reais.
+<br><br>
 
 #### Uso do Django ORM
 O projeto faz uso do `ORM (Object-Relational Mapping) do Django` para interagir com o banco de dados, eliminando a necessidade de escrever SQL manualmente. Essa abordagem foi escolhida principalmente para prevenir vulnerabilidades como SQL Injection, uma vez que o ORM do Django sanitiza automaticamente as consultas.
 
 Além disso, o ORM oferece diversas funcionalidades integradas que facilitam o desenvolvimento e a manutenção do banco de dados, como migrações automáticas, gerenciamento de relacionamentos entre tabelas e validação de dados.
+<br><br>
 
 #### Considerações
 - A maioria das decisões foram guiadas pelo objetivo de facilitar a configuração tanto da aplicação quanto do ambiente. No entanto, algumas dessas escolhas não seguem as melhores práticas para um ambiente de produção. Um exemplo disso é o uso de Docker Compose para a orquestração do ambiente.
@@ -66,11 +71,12 @@ Além disso, o ORM oferece diversas funcionalidades integradas que facilitam o d
 
 <!-- INSTRUCOES -->
 ## Vamos Começar?
-## Pre-requisitos
+## Pré-requisitos
 Antes de começar, verifique se você atende aos seguintes requisitos:
 - Ter `Docker Desktop` e `Docker Compose` instalados em sua máquina.
 
 Se ainda não os tiver instalados, consulte a [documentação oficial](https://docs.docker.com/get-started/) do Docker para obter as instruções de instalação.
+<br><br>
 
 ## Como Configurar o Ambiente e Rodar o Projeto
 Siga os passos abaixo para configurar e executar o projeto em sua máquina:
@@ -80,6 +86,7 @@ Siga os passos abaixo para configurar e executar o projeto em sua máquina:
 4. Construa o container: `docker-compose build`
 5. Inicie o container `docker-compose up -d`
 6. Caso queira parar a execução: `docker-compose down`
+<br>
 
 ## Descrição dos Endpoints
 #### Profissionais
@@ -106,6 +113,7 @@ Genrencia o agendamento de consultas entre profissional de saude e paciente
 - `POST /api/consultas/` → Cria um novo agendamento de consulta entre um paciente e um profissional de saúde.
 - `PUT /api/consultas/{id}` → Atualiza as informações de um agendamento de consulta existente.
 - `DELETE /api/consultas/{id}` → Cancela e remove um agendamento de consulta do sistema.
+<br>
 
 ## Como Interagir Com a API
 Após iniciar o projeto, a aplicação estará disponível nos seguintes endereços:
@@ -127,6 +135,7 @@ Você pode testar e interagir com os endpoints de três formas:
   - Caso prefira usar o terminal, você pode usar o cURL para fazer requisições.
   - Ele já vem instalado por padrão no macOS, Linux e Windows 10/11. Verifique com o comando `curl --version`.
   - Exemplo de uma requisição GET: `curl -X GET http://localhost:8000/api/profissionais`
+<br>
 
 ## Como Rodar os Testes Unitários
 Siga os passos abaixo para executar os testes unitários do projeto:
