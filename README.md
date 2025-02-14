@@ -2,36 +2,19 @@
 API Restful que permite o gerenciamento completo de consultas médicas, profissionais de saúde, e pacientes com foco em funcionalidade, segurança e boas práticas.
 
 <a id="readme-top"></a>
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#sobre-o-projeto">Sobre o Projeto</a>
-      <ul>
-        <li><a href="#tecnologias"> Tecnologias </a></li>
-      </ul>
-      <ul>
-        <li><a href="#decisões-de-arquitetura-e-design-de-código">Decisões de Arquitetura e Design de Código</a></li>
-      </ul>
-      <ul>
-        <li><a href="#considerações">Considerações</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#vamos-comecar?">Vamos comecar? </a>
-      <ul>
-        <li><a href="#pre-requisitos">Pre-requisitos</a></li>
-        <li><a href="#como-configurar-o-ambiente-e-rodar-o-projeto">Como Configurar o Ambiente e Rodar o Projeto</a></li>
-        <li><a href="#descrição-dos-endpoints"> Descrição dos Endpoints </a></li
-        <li><a href="#como-interagir-com-a-api">Como Interagir Com a API</a></li>
-        <li><a href="#como-rodar-os-testes-unitários">Como Rodar os Testes Unitários</a></li>
-      </ul>
-    </li>
-    <li><a href="#roadmap-e-melhorias">Roadmap e Melhorias</a></li>
-    <li><a href="#contato">Contato</a></li>
-  </ol>
-</details>
+## Índice
+- [Sobre o Projeto](#sobre-o-projeto)
+  - [Tecnologias](#tecnologias)
+  - [Decisões de Arquitetura e Design de Código](#decisões-de-arquitetura-e-design-de-código)
+  - [Considerações](#considerações)
+- [Vamos Começar?](#vamos-começar)
+  - [Pré-requisitos](#pre-requisitos)
+  - [Como Configurar o Ambiente e Rodar o Projeto](#como-configurar-o-ambiente-e-rodar-o-projeto)
+  - [Descrição dos Endpoints](#descrição-dos-endpoints)
+  - [Como Interagir com a API](#como-interagir-com-a-api)
+  - [Como Rodar os Testes Unitários](#como-rodar-os-testes-unitários)
+- [Roadmap e Melhorias](#roadmap-e-melhorias)
+- [Contato](#contato)
 
 <!-- SOBRE O PROJETO -->
 ## Sobre o Projeto
@@ -82,6 +65,7 @@ Além disso, o ORM oferece diversas funcionalidades integradas que facilitam o d
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- INSTRUCOES -->
+## Vamos Começar?
 ## Pre-requisitos
 Antes de começar, verifique se você atende aos seguintes requisitos:
 - Ter `Docker Desktop` e `Docker Compose` instalados em sua máquina.
