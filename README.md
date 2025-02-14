@@ -62,7 +62,7 @@ Além disso, o ORM oferece diversas funcionalidades integradas que facilitam o d
 <br><br>
 
 #### Considerações
-- A maioria das decisões foram guiadas pelo objetivo de facilitar a configuração tanto da aplicação quanto do ambiente. No entanto, algumas dessas escolhas não seguem as melhores práticas para um ambiente de produção. Um exemplo disso é o uso de Docker Compose para a orquestração do ambiente.
+- A maioria das decisões foram guiadas pelo objetivo de facilitar a configuração tanto da aplicação quanto do ambiente. No entanto, algumas dessas escolhas não seguem as melhores práticas para um ambiente de produção.
 - O projeto utiliza um usuário padrão do PostgreSQL, com credenciais definidas diretamente no arquivo Docker Compose. Além disso, diversas variáveis de ambiente (como PORT) estão expostas no código. Em projetos reais, isso representa uma séria vulnerabilidade de segurança, pois credenciais e configurações sensíveis não devem ser armazenadas nem expostas no GitHub. O ideal seria utilizar arquivos .env e um gerenciador de segredos adequado.
 - O gerenciamento dos dados de Profissão é restrito a usuários administradores, e por isso não há uma API exposta para essa entidade. Para simplificar o uso do projeto, essa tabela já vem pré-inicializada e não pode ser modificada. O ideal seria expor esse endpoint apenas para usuários autenticados e autorizados, garantindo o controle de acesso adequado.
 - Devido ao tempo limitado do desafio, apenas um dos endpoints conta com testes unitários básicos. No entanto, o ideal seria garantir um test coverage de pelo menos 80%, abrangendo testes unitários e de integração para validar a API de forma mais robusta.
