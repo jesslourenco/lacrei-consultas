@@ -30,5 +30,5 @@ class PacienteService:
     def delete_pacient(pk: int) -> None:
         pacient = PacienteRepo.get_by_id(pk)
         if not pacient:
-            raise ObjectDoesNotExist("Profissional nao encontrado.")
+            raise ObjectDoesNotExist("Paciente nao encontrado.")
         PacienteRepo.delete(pacient)
