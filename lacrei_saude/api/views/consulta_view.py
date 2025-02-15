@@ -81,5 +81,5 @@ class ConsultaView(ViewSet):
         try:
             ConsultaService.delete_consulta(pk)
             return Response(status=status.HTTP_204_NO_CONTENT)
-        except ValidationError as e:
+        except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
