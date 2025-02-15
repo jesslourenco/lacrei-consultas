@@ -3,8 +3,6 @@ FROM python:3.13-slim AS builder
 
 RUN apt-get update && apt-get install -y \
   curl \
-  gcc \
-  libpq-dev \
   postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
@@ -25,8 +23,6 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
   curl \
-  gcc \
-  libpq-dev \
   postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
